@@ -36,20 +36,20 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
           <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="#">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">
-                 รายละเอียดหอ</span>
+                รายละเอียดหอ</span>
             </a>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายรับรายจ่าย">
-            <a class="nav-link" href="income.html">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+            <a class="nav-link" href="#">
               <i class="fa fa-fw fa-area-chart"></i>
               <span class="nav-link-text">
                 รายรับรายจ่าย</span>
             </a>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="สถาณะหอพัก">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-wrench"></i>
               <span class="nav-link-text">
@@ -57,14 +57,14 @@
             </a>
             <ul class="sidenav-second-level collapse" id="collapseComponents">
               <li>
-                <a href="status dorm.html">ดูห้องว่าง</a>
+                <a href="static-nav.html">ดูห้องว่าง</a>
               </li>
               <li>
-                <a href="status dorm client.html">ดูห้องค้างชำระ</a>
+                <a href="#">ดูห้องค้างชำระ</a>
               </li>
             </ul>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="รายละเอียด">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-file"></i>
               <span class="nav-link-text">
@@ -72,13 +72,13 @@
             </a>
             <ul class="sidenav-second-level collapse" id="collapseExamplePages">
               <li>
-                <a href="rules.html">รายละเอียดกฎ</a>
+                <a href="login.html">รายละเอียดกฎ</a>
               </li>
               <li>
-                <a href="staff.html">บุคลากร</a>
+                <a href="register.html">บุคลากร</a>
               </li>
               <li>
-                <a href="#">สัญญาเช่า</a>
+                <a href="forgot-password.html">สัญญาเช่า</a>
               </li>
             </ul>
           </li>
@@ -212,9 +212,9 @@
         <!-- Breadcrumbs -->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">สถานะหอพัก</a>
+            <a href="#">Status</a>
           </li>
-          <li class="breadcrumb-item active">ดูห้องค้างชำระ</li>
+          <li class="breadcrumb-item active">Client Status</li>
         </ol>
 
         
@@ -225,27 +225,28 @@
         <div class="card mb-3">
           <div class="card-header">
             <i class="fa fa-table"></i>
-            สถานะค่าเช่า
+Client Status
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
                 <thead>
                   <tr>
-                    
-                    <th>หมายเลขตึก</th>
-                    <th>หมายเลขห้อง</th>
-					<th>เจ้าของห้อง</th>
-                    <th>สถานะค่าเช่า</th>
+                    <th>Client_ID</th>
+                    <th>Job</th>
+                    <th>SSN</th>
+					<th>Previous Address</th>
+                    <th>Phone Number</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
                     
-                    <th>หมายเลขตึก</th>
-                    <th>หมายเลขห้อง</th>
-					<th>เจ้าของห้อง</th>
-                    <th>สถานะค่าเช่า</th>
+                    <th>Client_ID</th>
+                    <th>Job</th>
+                    <th>SSN</th>
+					<th>Previous Address</th>
+                    <th>Phone Number</th>
                   </tr>
                 </tfoot>
                 <tbody>
