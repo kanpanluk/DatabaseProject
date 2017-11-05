@@ -5,7 +5,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     require_once 'config.php';
     
     // Prepare a select statement
-    $sql = "DELETE FROM Room WHERE RoomNumber = :RoomNumber";
+    $sql = "DELETE FROM room WHERE RoomNumber = :RoomNumber";
     
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters

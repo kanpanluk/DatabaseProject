@@ -22,7 +22,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
     <style type="text/css">
         .wrapper{
@@ -233,7 +233,7 @@
           <li class="breadcrumb-item">
             <a href="#">สถานะหอพัก</a>
           </li>
-          <li class="breadcrumb-item active">ดูห้องค้างชำระ</li>
+          <li class="breadcrumb-item active">ดูห้องว่าง</li>
         </ol>
 
         
@@ -241,28 +241,27 @@
 
 
 <!-- Example Tables Card -->
-         <div class="wrapper">
+        <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="pull-left">Clients Details</h2>
-                        <a href="create.php" class="btn btn-success pull-right">Add New Client</a>
+                        <h2 class="pull-left">Rooms Details</h2>
+                        <a href="createl.php" class="btn btn-success pull-right">Add New Client</a>
                     </div>
                     <?php
                     // Include config file
                     require_once 'config.php';
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM room";
+                    $sql = "SELECT * FROM livingStatus";
                     if($result = $pdo->query($sql)){
                         if($result->rowCount() > 0){
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th>Room Number</th>";
-                                        echo "<th>Name</th>";
-                                        echo "<th>Building</th>";
+										echo "<th>building</th>";
+                                        echo "<th>room Number</th>";
                                         echo "<th>Status</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
@@ -270,19 +269,20 @@
                                 echo "<tbody>";
                                 while($row = $result->fetch()){
                                     echo "<tr>";
-                                        echo "<td>" . $row['RoomNumber'] . "</td>";
-                                        echo "<td>" . $row['Client'] . "</td>";
-                                        echo "<td>" . $row['BuildingID'] . "</td>";
-                                        if($row['Status']==0){
-                                          echo "<td>ยังไม่จ่าย</td>";
+										echo "<td>" . $row['buildingID'] . "</td>";
+                                        echo "<td>" . $row['roomNumber'] . "</td>";
+                                        if($row['livingStatus']==0){
+                                          echo "<td>ว่าง</td>";
+                                        }else if($row['livingStatus']==1){
+                                          echo "<td>มีผู้พัก</td>";
                                         }else{
-                                          echo "<td>จ่ายแล้ว</td>";
+                                          echo "<td>จอง</td>";
                                         }
 
                                         echo "<td>";
         
-                                            echo "<a href='delete.php?id=". $row['RoomNumber'] ."class='btn btn-success pull-right'>Modify</a>";
-                                            echo "<a href='delete.php?id=". $row['RoomNumber'] ."class='btn btn-success pull-right'>Delete</a>";
+                                            echo "<a href='delete.php?id=". $row['roomNumber'] ."class='btn btn-success pull-right'>Modify</a>";
+                                            echo "<a href='delete.php?id=". $row['roomNumber'] ."class='btn btn-success pull-right'>Delete</a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }
@@ -303,6 +303,9 @@
                 </div>
             </div>        
         </div>
+    </div>
+      <!-- /.container-fluid -->
+
     </div>
     <!-- /.content-wrapper -->
 
