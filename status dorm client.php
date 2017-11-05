@@ -22,6 +22,25 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <style type="text/css">
+        .wrapper{
+            width: 650px;
+            margin: 0 auto;
+        }
+        .page-header h2{
+            margin-top: 0;
+        }
+        table tr td:last-child a{
+            margin-right: 15px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        });
+    </script>
 
   </head>
 
@@ -222,54 +241,68 @@
 
 
 <!-- Example Tables Card -->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-table"></i>
-            สถานะค่าเช่า
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
-                <thead>
-                  <tr>
+         <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header clearfix">
+                        <h2 class="pull-left">Clients Details</h2>
+                        <a href="create.php" class="btn btn-success pull-right">Add New Client</a>
+                    </div>
+                    <?php
+                    // Include config file
+                    require_once 'config.php';
                     
-                    <th>หมายเลขตึก</th>
-                    <th>หมายเลขห้อง</th>
-					<th>เจ้าของห้อง</th>
-                    <th>สถานะค่าเช่า</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
+                    // Attempt select query execution
+                    $sql = "SELECT * FROM Room";
+                    if($result = $pdo->query($sql)){
+                        if($result->rowCount() > 0){
+                            echo "<table class='table table-bordered table-striped'>";
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        echo "<th>Room Number</th>";
+                                        echo "<th>Name</th>";
+                                        echo "<th>Building</th>";
+                                        echo "<th>Status</th>";
+                                        echo "<th>Action</th>";
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = $result->fetch()){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['RoomNumber'] . "</td>";
+                                        echo "<td>" . $row['Client'] . "</td>";
+                                        echo "<td>" . $row['BuildingID'] . "</td>";
+                                        if($row['Status']==0){
+                                          echo "<td>ยังไม่จ่าย</td>";
+                                        }else{
+                                          echo "<td>จ่ายแล้ว</td>";
+                                        }
+
+                                        echo "<td>";
+        
+                                            echo "<a href='delete.php?id=". $row['RoomNumber'] ."class='btn btn-success pull-right'>Modify</a>";
+                                            echo "<a href='delete.php?id=". $row['RoomNumber'] ."class='btn btn-success pull-right'>Delete</a>";
+                                        echo "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            unset($result);
+                        } else{
+                            echo "<p class='lead'><em>No records were found.</em></p>";
+                        }
+                    } else{
+                        echo "ERROR: Could not able to execute $sql. " . $mysqli->error;
+                    }
                     
-                    <th>หมายเลขตึก</th>
-                    <th>หมายเลขห้อง</th>
-					<th>เจ้าของห้อง</th>
-                    <th>สถานะค่าเช่า</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr>
-                    
-                    <td>1</td>
-                    <td>1011</td>
-					<td>A</td>
-                    <td>ค้างชำระ</td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="card-footer small text-muted">
-            Updated yesterday at 11:59 PM 
-          </div>
+                    // Close connection
+                    unset($pdo);
+                    ?>
+                </div>
+            </div>        
         </div>
-
-
-      </div>
-      <!-- /.container-fluid -->
-
     </div>
     <!-- /.content-wrapper -->
 
