@@ -48,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($Client_err) && empty($RoomNumber_err) && empty($BuildingID_err)){
         // Prepare an insert statement
         echo "$BuildingID";
-        $sql = "INSERT INTO Room (Client,RoomNumber,BuildingID,Status) VALUES (:Client, :RoomNumber, :BuildingID, :Status)";
+        $sql = "INSERT INTO room (Client,RoomNumber,BuildingID,Status) VALUES (:Client, :RoomNumber, :BuildingID, :Status)";
  
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters

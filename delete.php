@@ -5,19 +5,19 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     require_once 'config.php';
     
     // Prepare a select statement
-    $sql = "DELETE FROM Room WHERE RoomNumber = :RoomNumber";
+    $sql = "DELETE FROM livingstatus WHERE RoomNumber = :RoomNumber";
     
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters
         $stmt->bindParam(':RoomNumber', $param_id);
         
         // Set parameters
-        $param_id = trim($_POST["RoomNumber"]);
+        $param_id = trim($_POST["id"]);
         
         // Attempt to execute the prepared statement
         if($stmt->execute()){
             // Records deleted successfully. Redirect to landing page
-            header("location: status dorm client.php");
+            header("location: status dorm.php");
             exit();
         } else{
             echo "Oops! Something went wrong. Please try again later.";
