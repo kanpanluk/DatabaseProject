@@ -76,10 +76,10 @@
             </a>
             <ul class="sidenav-second-level collapse" id="collapseComponents">
               <li>
-                <a href="status dorm.html">ดูห้องว่าง</a>
+                <a href="status dorm.php">ดูห้องว่าง</a>
               </li>
               <li>
-                <a href="status dorm client.html">ดูห้องค้างชำระ</a>
+                <a href="status dorm client.php">ดูห้องค้างชำระ</a>
               </li>
             </ul>
           </li>
@@ -281,8 +281,8 @@
 
                                         echo "<td>";
         
-                                            echo "<a href='delete.php?id=". $row['RoomNumber'] ."class='btn btn-success pull-right'>Modify</a>";
-                                            echo "<a href='delete.php?id=". $row['RoomNumber'] ."class='btn btn-success pull-right'>Delete</a>";
+                                            echo "<a href='deletel.php?id=". $row['RoomNumber'] ."class='btn btn-success pull-right'>Modify</a>";
+                                            echo "<a href='deletel.php?id=". $row['RoomNumber'] ."class='btn btn-success pull-right'>Delete</a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }
