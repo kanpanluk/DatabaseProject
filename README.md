@@ -10,6 +10,6 @@ Wachirawit Kanpanluk 580610673
 Supakarn Chaidaroon 580610680
 
 
-![alt text](https://github.com/KittitatB/DatabaseProject/blob/master/group10/group10.pdf)
+![Table pic](https://github.com/KittitatB/DatabaseProject/blob/master/group10/group10.pdf)
 
 
