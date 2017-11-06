@@ -124,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="help-block"><?php echo $Status_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-default">Cancel</a>
+                        <a href="status dorm client.php" class="btn btn-default">Cancel</a>
                     </form>
                 </div>
             </div>        

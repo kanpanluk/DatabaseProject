@@ -281,8 +281,8 @@
 
                                         echo "<td>";
         
-                                            echo "<a href='delete.php?id=". $row['roomNumber'] ."class='btn btn-success pull-right'>Modify</a>";
-                                            echo "<a href='delete.php?id=". $row['roomNumber'] ."class='btn btn-success pull-right'>Delete</a>";
+                                            echo "<a href='updatel.php?id=". $row['roomNumber'] ."' class='btn btn-success pull-right'>Modify</a>";
+                                            echo "<a href='delete.php?id=". $row['roomNumber'] ."' class='btn btn-success pull-right'>Delete</a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }
