@@ -3,64 +3,58 @@
 require_once 'config.php';
  
 // Define variables and initialize with empty values
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+//$Client = $address = $Status = "";
+//$Client_err = $address_err = $Status_err = "";
+
+$Client = $RoomNumber = $Status = "";
+$Client_err = $RoomNumber_err =  $Status_err ="";
  
 // Processing form data when form is submitted
-if(isset($_POST["id"]) && !empty($_POST["id"])){
-    // Get hidden input value
-    $id = $_POST["id"];
+if(isset($_POST["RoomNumber"]) && !empty($_POST["RoomNumber"])){
+    // Get hRoomNumberden input value
+    $RoomNumber = $_POST["RoomNumber"];
     
-    // Validate name
-    $input_name = trim($_POST["name"]);
-    if(empty($input_name)){
-        $name_err = "Please enter a name.";
-    } elseif(!filter_var(trim($_POST["name"]), FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z'-.\s ]+$/")))){
-        $name_err = 'Please enter a valid name.';
+    // ValRoomNumberate Client
+    $input_Client = trim($_POST["Client"]);
+    if(empty($input_Client)){
+        $Client_err = "Please enter a Client.";
+    } elseif(!filter_var(trim($_POST["Client"]), FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z'-.\s ]+$/")))){
+        $Client_err = 'Please enter a valid Name.';
     } else{
-        $name = $input_name;
+        $Client = $input_Client;
     }
     
-    // Validate address address
-    $input_address = trim($_POST["address"]);
-    if(empty($input_address)){
-        $address_err = 'Please enter an address.';     
-    } else{
-        $address = $input_address;
-    }
     
-    // Validate salary
-    $input_salary = trim($_POST["salary"]);
-    if(empty($input_salary)){
-        $salary_err = "Please enter the salary amount.";     
-    } elseif(!ctype_digit($input_salary)){
-        $salary_err = 'Please enter a positive integer value.';
+    // ValRoomNumberate Status
+    $input_Status = trim($_POST["Status"]);
+    if(empty($input_Status)){
+        $Status_err = "Please enter the Status amount.";     
+    } elseif(!ctype_digit($input_Status)){
+        $Status_err = 'Please enter a positive integer value.';
     } else{
-        $salary = $input_salary;
+        $Status = $input_Status;
     }
     
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
+    if(empty($Client_err) && empty($Status_err)){
         // Prepare an insert statement
-        $sql = "UPDATE employees SET name=:name, address=:address, salary=:salary WHERE id=:id";
+        $sql = "UPDATE Room SET Client=:Client, Status=:Status WHERE RoomNumber=:RoomNumber";
  
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(':name', $param_name);
-            $stmt->bindParam(':address', $param_address);
-            $stmt->bindParam(':salary', $param_salary);
-            $stmt->bindParam(':id', $param_id);
+            $stmt->bindParam(':Client', $param_Client);
+            $stmt->bindParam(':Status', $param_Status);
+            $stmt->bindParam(':RoomNumber', $param_RoomNumber);
             
             // Set parameters
-            $param_name = $name;
-            $param_address = $address;
-            $param_salary = $salary;
-            $param_id = $id;
+            $param_Client = $Client;
+            $param_Status = $Status;
+            $param_RoomNumber = $RoomNumber;
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Records updated successfully. Redirect to landing page
-                header("location: index.php");
+                header("location: status dorm client.php");
                 exit();
             } else{
                 echo "Something went wrong. Please try again later.";
@@ -74,19 +68,19 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Close connection
     unset($pdo);
 } else{
-    // Check existence of id parameter before processing further
+    // Check existence of RoomNumber parameter before processing further
     if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
         // Get URL parameter
-        $id =  trim($_GET["id"]);
+        $RoomNumber =  trim($_GET["id"]);
         
         // Prepare a select statement
-        $sql = "SELECT * FROM employees WHERE id = :id";
+        $sql = "SELECT * FROM Room WHERE RoomNumber = :RoomNumber";
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(':id', $param_id);
+            $stmt->bindParam(':RoomNumber', $param_RoomNumber);
             
             // Set parameters
-            $param_id = $id;
+            $param_RoomNumber = $RoomNumber;
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -95,13 +89,14 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     contains only one row, we don't need to use while loop */
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 
-                    // Retrieve individual field value
-                    $name = $row["name"];
-                    $address = $row["address"];
-                    $salary = $row["salary"];
+                    // Retrieve indivRoomNumberual field value
+                    $Client = $row["Client"];
+                    $Status = $row["Status"];
                 } else{
-                    // URL doesn't contain valid id. Redirect to error page
-                    header("location: error.php");
+                    // URL doesn't contain valRoomNumber RoomNumber. Redirect to error page
+                    echo "Kuy";
+                    echo ($RoomNumber);
+                    //header("location: error.php");
                     exit();
                 }
                 
@@ -116,8 +111,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         // Close connection
         unset($pdo);
     }  else{
-        // URL doesn't contain id parameter. Redirect to error page
-        header("location: error.php");
+        // URL doesn't contain RoomNumber parameter. Redirect to error page
+        echo "Kuy";
+         echo ($RoomNumber);
+        //header("location: error.php");
         exit();
     }
 }
@@ -146,24 +143,19 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     </div>
                     <p>Please edit the input values and submit to update the record.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
-                        <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" value="<?php echo $name; ?>">
-                            <span class="help-block"><?php echo $name_err;?></span>
+                        <div class="form-group <?php echo (!empty($Client_err)) ? 'has-error' : ''; ?>">
+                            <label>Client</label>
+                            <input type="text" name="Client" class="form-control" value="<?php echo $Client; ?>">
+                            <span class="help-block"><?php echo $Client_err;?></span>
                         </div>
-                        <div class="form-group <?php echo (!empty($address_err)) ? 'has-error' : ''; ?>">
-                            <label>Address</label>
-                            <textarea name="address" class="form-control"><?php echo $address; ?></textarea>
-                            <span class="help-block"><?php echo $address_err;?></span>
+                         <div class="form-group <?php echo (!empty($Status_err)) ? 'has-error' : ''; ?>">
+                            <label>สถานะ</label>
+                            <input type="text" name="Status" class="form-control" value="<?php echo $Status; ?>">
+                            <span class="help-block"><?php echo $Status_err;?></span>
                         </div>
-                        <div class="form-group <?php echo (!empty($salary_err)) ? 'has-error' : ''; ?>">
-                            <label>Salary</label>
-                            <input type="text" name="salary" class="form-control" value="<?php echo $salary; ?>">
-                            <span class="help-block"><?php echo $salary_err;?></span>
-                        </div>
-                        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                        <input type="hidden" name="RoomNumber" value="<?php echo $RoomNumber; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-default">Cancel</a>
+                        <a href="status dorm client.php" class="btn btn-default">Cancel</a>
                     </form>
                 </div>
             </div>        
